@@ -23,7 +23,6 @@
       color: #FFFFFF;
       font-family: 'DM Sans', sans-serif;
       padding: 20px;
-      min-height: 100vh;
     }
     
     .layout {
@@ -63,10 +62,6 @@
       border: 1px solid #D4A500;
     }
     
-    .mode-btn:hover {
-      opacity: 0.8;
-    }
-    
     .content {
       flex: 1;
       max-width: 600px;
@@ -80,7 +75,7 @@
       font-size: 32px;
       color: #D4A500;
       margin-bottom: 8px;
-      font-family: 'Big Shoulders Display', sans-serif;
+      font-family: 'Big Shoulders Display', serif;
       font-weight: 700;
     }
     
@@ -130,12 +125,6 @@
       color: #888888;
     }
     
-    input[type="number"]:focus {
-      outline: none;
-      border-color: #D4A500;
-      box-shadow: 0 0 0 2px rgba(212, 165, 0, 0.1);
-    }
-    
     .results-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -170,76 +159,40 @@
       display: block;
     }
     
-    .section h3 {
-      font-size: 16px;
-      color: #D4A500;
-      margin: 0 0 20px 0;
-      font-weight: 600;
-    }
-    
     .example-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 16px;
-      padding: 12px;
-      background: #161616;
-      border-radius: 4px;
-      border: 1px solid #D4A500;
+      margin-bottom: 24px;
     }
     
     .example-item:last-child {
       margin-bottom: 0;
     }
     
-    .example-label {
-      font-size: 14px;
-      color: #D4A500;
-      font-weight: 600;
-      min-width: 70px;
-    }
-    
-    .example-item input {
-      flex: 1;
-      min-width: 80px;
-      padding: 8px;
-      background: #2A2A2A;
-      border: 1px solid #D4A500;
-      color: #D4A500;
-      border-radius: 4px;
-      font-size: 14px;
-      font-family: 'DM Sans', sans-serif;
-    }
-    
-    .example-item input::placeholder {
-      color: #888888;
-    }
-    
-    .example-item input:focus {
-      outline: none;
-      box-shadow: 0 0 0 2px rgba(212, 165, 0, 0.1);
-    }
-    
-    .example-unit {
-      font-size: 12px;
-      color: #E0E0E0;
-      min-width: 40px;
-    }
-    
-    .example-arrow {
-      font-size: 12px;
-      color: #D4A500;
-      font-weight: 600;
-      min-width: 25px;
-      text-align: center;
-    }
-    
     .example-result {
-      font-size: 14px;
+      background: #161616;
+      padding: 12px;
+      border-radius: 4px;
+      border: 1px solid #D4A500;
+      margin-top: 8px;
+    }
+    
+    .example-result p:first-child {
+      font-size: 11px;
+      color: #E0E0E0;
+      margin: 0;
+    }
+    
+    .example-result p:last-child {
+      font-size: 20px;
       color: #D4A500;
+      margin: 6px 0 0 0;
       font-weight: 700;
-      min-width: 100px;
-      text-align: right;
+    }
+    
+    .section h3 {
+      font-size: 16px;
+      color: #D4A500;
+      margin: 0 0 20px 0;
+      font-weight: 600;
     }
     
     .footer {
@@ -250,13 +203,8 @@
     }
     
     @media (max-width: 768px) {
-      body {
-        padding: 16px;
-      }
-      
       .layout {
         flex-direction: column;
-        gap: 16px;
       }
       
       .sidebar {
@@ -266,45 +214,14 @@
       
       .mode-btn {
         flex: 1;
-        text-align: center;
-        padding: 10px 12px;
-        font-size: 12px;
       }
       
       .content {
         max-width: 100%;
       }
       
-      .section {
-        padding: 16px;
-      }
-      
-      .example-item {
-        flex-wrap: wrap;
-        gap: 8px;
-      }
-      
-      .example-label {
-        flex: 1;
-        min-width: 60px;
-      }
-      
-      .example-item input {
-        flex: 0 1 70px;
-      }
-      
-      .example-unit {
-        min-width: 30px;
-        flex: 0;
-      }
-      
-      .example-arrow {
-        min-width: 20px;
-      }
-      
-      .example-result {
-        flex: 1;
-        min-width: 80px;
+      body {
+        padding: 12px;
       }
     }
   </style>
@@ -334,11 +251,11 @@
         <div class="section">
           <div class="input-group">
             <label>Taille du bâtiment réel (m)</label>
-            <input type="number" id="m1-real" placeholder="45" inputmode="decimal">
+            <input type="number" id="m1-real" placeholder="45">
           </div>
           <div class="input-group">
             <label>Taille de la maquette (cm)</label>
-            <input type="number" id="m1-model" placeholder="15" inputmode="decimal">
+            <input type="number" id="m1-model" placeholder="15">
           </div>
           <div class="results-grid">
             <div class="result-box">
@@ -352,35 +269,43 @@
           </div>
         </div>
         
-        <div class="section">
-          <h3 id="m1-scale-text">À cette échelle :</h3>
+        <div class="section" id="m1-examples">
+          <h3 id="m1-scale-title">À cette échelle :</h3>
+          
           <div class="example-item">
-            <span class="example-label">Poteau</span>
-            <input type="number" class="m1-example" data-object="poteau" placeholder="6.5" inputmode="decimal">
-            <span class="example-unit">m</span>
-            <span class="example-arrow">→</span>
-            <span class="example-result" data-object="poteau">21.67 mm</span>
+            <label style="font-size: 12px; color: #E0E0E0; display: block; margin-bottom: 8px;">Poteau (hauteur en m)</label>
+            <input type="number" id="m1-poteau" placeholder="6.5" inputmode="decimal">
+            <div class="example-result">
+              <p>mesurera</p>
+              <p id="m1-poteau-result">—</p>
+            </div>
           </div>
+          
           <div class="example-item">
-            <span class="example-label">Porte</span>
-            <input type="number" class="m1-example" data-object="porte" placeholder="2.1" inputmode="decimal">
-            <span class="example-unit">m</span>
-            <span class="example-arrow">→</span>
-            <span class="example-result" data-object="porte">7 mm</span>
+            <label style="font-size: 12px; color: #E0E0E0; display: block; margin-bottom: 8px;">Porte (hauteur en m)</label>
+            <input type="number" id="m1-porte" placeholder="2.1" inputmode="decimal">
+            <div class="example-result">
+              <p>mesurera</p>
+              <p id="m1-porte-result">—</p>
+            </div>
           </div>
+          
           <div class="example-item">
-            <span class="example-label">Bâtiment</span>
-            <input type="number" class="m1-example" data-object="batiment" placeholder="25" inputmode="decimal">
-            <span class="example-unit">m</span>
-            <span class="example-arrow">→</span>
-            <span class="example-result" data-object="batiment">8.33 cm</span>
+            <label style="font-size: 12px; color: #E0E0E0; display: block; margin-bottom: 8px;">Bâtiment (hauteur en m)</label>
+            <input type="number" id="m1-batiment" placeholder="25" inputmode="decimal">
+            <div class="example-result">
+              <p>mesurera</p>
+              <p id="m1-batiment-result">—</p>
+            </div>
           </div>
+          
           <div class="example-item">
-            <span class="example-label">Terrain</span>
-            <input type="number" class="m1-example" data-object="terrain" placeholder="120" inputmode="decimal">
-            <span class="example-unit">m</span>
-            <span class="example-arrow">→</span>
-            <span class="example-result" data-object="terrain">40 cm</span>
+            <label style="font-size: 12px; color: #E0E0E0; display: block; margin-bottom: 8px;">Terrain (largeur en m)</label>
+            <input type="number" id="m1-terrain" placeholder="120" inputmode="decimal">
+            <div class="example-result">
+              <p>mesurera</p>
+              <p id="m1-terrain-result">—</p>
+            </div>
           </div>
         </div>
       </div>
@@ -390,11 +315,11 @@
         <div class="section">
           <div class="input-group">
             <label>Taille du bâtiment réel (m)</label>
-            <input type="number" id="m2-real" placeholder="45" inputmode="decimal">
+            <input type="number" id="m2-real" placeholder="45">
           </div>
           <div class="input-group">
             <label>Échelle (1/X)</label>
-            <input type="number" id="m2-scale" placeholder="200" inputmode="decimal">
+            <input type="number" id="m2-scale" placeholder="200">
           </div>
           <div class="results-grid">
             <div class="result-box">
@@ -408,35 +333,43 @@
           </div>
         </div>
         
-        <div class="section">
-          <h3 id="m2-scale-text">À cette échelle :</h3>
+        <div class="section" id="m2-examples">
+          <h3 id="m2-scale-title">À cette échelle :</h3>
+          
           <div class="example-item">
-            <span class="example-label">Poteau</span>
-            <input type="number" class="m2-example" data-object="poteau" placeholder="6.5" inputmode="decimal">
-            <span class="example-unit">m</span>
-            <span class="example-arrow">→</span>
-            <span class="example-result" data-object="poteau">21.67 mm</span>
+            <label style="font-size: 12px; color: #E0E0E0; display: block; margin-bottom: 8px;">Poteau (hauteur en m)</label>
+            <input type="number" id="m2-poteau" placeholder="6.5" inputmode="decimal">
+            <div class="example-result">
+              <p>mesurera</p>
+              <p id="m2-poteau-result">—</p>
+            </div>
           </div>
+          
           <div class="example-item">
-            <span class="example-label">Porte</span>
-            <input type="number" class="m2-example" data-object="porte" placeholder="2.1" inputmode="decimal">
-            <span class="example-unit">m</span>
-            <span class="example-arrow">→</span>
-            <span class="example-result" data-object="porte">7 mm</span>
+            <label style="font-size: 12px; color: #E0E0E0; display: block; margin-bottom: 8px;">Porte (hauteur en m)</label>
+            <input type="number" id="m2-porte" placeholder="2.1" inputmode="decimal">
+            <div class="example-result">
+              <p>mesurera</p>
+              <p id="m2-porte-result">—</p>
+            </div>
           </div>
+          
           <div class="example-item">
-            <span class="example-label">Bâtiment</span>
-            <input type="number" class="m2-example" data-object="batiment" placeholder="25" inputmode="decimal">
-            <span class="example-unit">m</span>
-            <span class="example-arrow">→</span>
-            <span class="example-result" data-object="batiment">8.33 cm</span>
+            <label style="font-size: 12px; color: #E0E0E0; display: block; margin-bottom: 8px;">Bâtiment (hauteur en m)</label>
+            <input type="number" id="m2-batiment" placeholder="25" inputmode="decimal">
+            <div class="example-result">
+              <p>mesurera</p>
+              <p id="m2-batiment-result">—</p>
+            </div>
           </div>
+          
           <div class="example-item">
-            <span class="example-label">Terrain</span>
-            <input type="number" class="m2-example" data-object="terrain" placeholder="120" inputmode="decimal">
-            <span class="example-unit">m</span>
-            <span class="example-arrow">→</span>
-            <span class="example-result" data-object="terrain">40 cm</span>
+            <label style="font-size: 12px; color: #E0E0E0; display: block; margin-bottom: 8px;">Terrain (largeur en m)</label>
+            <input type="number" id="m2-terrain" placeholder="120" inputmode="decimal">
+            <div class="example-result">
+              <p>mesurera</p>
+              <p id="m2-terrain-result">—</p>
+            </div>
           </div>
         </div>
       </div>
@@ -446,11 +379,11 @@
         <div class="section">
           <div class="input-group">
             <label>Taille de la maquette (cm)</label>
-            <input type="number" id="m3-model" placeholder="15" inputmode="decimal">
+            <input type="number" id="m3-model" placeholder="15">
           </div>
           <div class="input-group">
             <label>Échelle (1/X)</label>
-            <input type="number" id="m3-scale" placeholder="200" inputmode="decimal">
+            <input type="number" id="m3-scale" placeholder="200">
           </div>
           <div class="results-grid">
             <div class="result-box">
@@ -464,112 +397,148 @@
           </div>
         </div>
         
-        <div class="section">
-          <h3 id="m3-scale-text">À cette échelle :</h3>
+        <div class="section" id="m3-examples">
+          <h3 id="m3-scale-title">À cette échelle :</h3>
+          
           <div class="example-item">
-            <span class="example-label">Poteau</span>
-            <input type="number" class="m3-example" data-object="poteau" placeholder="6.5" inputmode="decimal">
-            <span class="example-unit">m</span>
-            <span class="example-arrow">→</span>
-            <span class="example-result" data-object="poteau">21.67 mm</span>
+            <label style="font-size: 12px; color: #E0E0E0; display: block; margin-bottom: 8px;">Poteau (hauteur en m)</label>
+            <input type="number" id="m3-poteau" placeholder="6.5" inputmode="decimal">
+            <div class="example-result">
+              <p>mesurera</p>
+              <p id="m3-poteau-result">—</p>
+            </div>
           </div>
+          
           <div class="example-item">
-            <span class="example-label">Porte</span>
-            <input type="number" class="m3-example" data-object="porte" placeholder="2.1" inputmode="decimal">
-            <span class="example-unit">m</span>
-            <span class="example-arrow">→</span>
-            <span class="example-result" data-object="porte">7 mm</span>
+            <label style="font-size: 12px; color: #E0E0E0; display: block; margin-bottom: 8px;">Porte (hauteur en m)</label>
+            <input type="number" id="m3-porte" placeholder="2.1" inputmode="decimal">
+            <div class="example-result">
+              <p>mesurera</p>
+              <p id="m3-porte-result">—</p>
+            </div>
           </div>
+          
           <div class="example-item">
-            <span class="example-label">Bâtiment</span>
-            <input type="number" class="m3-example" data-object="batiment" placeholder="25" inputmode="decimal">
-            <span class="example-unit">m</span>
-            <span class="example-arrow">→</span>
-            <span class="example-result" data-object="batiment">8.33 cm</span>
+            <label style="font-size: 12px; color: #E0E0E0; display: block; margin-bottom: 8px;">Bâtiment (hauteur en m)</label>
+            <input type="number" id="m3-batiment" placeholder="25" inputmode="decimal">
+            <div class="example-result">
+              <p>mesurera</p>
+              <p id="m3-batiment-result">—</p>
+            </div>
           </div>
+          
           <div class="example-item">
-            <span class="example-label">Terrain</span>
-            <input type="number" class="m3-example" data-object="terrain" placeholder="120" inputmode="decimal">
-            <span class="example-unit">m</span>
-            <span class="example-arrow">→</span>
-            <span class="example-result" data-object="terrain">40 cm</span>
+            <label style="font-size: 12px; color: #E0E0E0; display: block; margin-bottom: 8px;">Terrain (largeur en m)</label>
+            <input type="number" id="m3-terrain" placeholder="120" inputmode="decimal">
+            <div class="example-result">
+              <p>mesurera</p>
+              <p id="m3-terrain-result">—</p>
+            </div>
           </div>
         </div>
-      </div>
-      
-      <div class="footer">
-        Échelle = Réel ÷ Maquette  |  Maquette = Réel ÷ Échelle  |  Réduction % = 100 ÷ Échelle
       </div>
     </div>
   </div>
   
   <script>
-    // MODE 1
+    // Éléments Mode 1
     const m1Real = document.getElementById('m1-real');
     const m1Model = document.getElementById('m1-model');
     const m1Scale = document.getElementById('m1-scale');
     const m1Reduction = document.getElementById('m1-reduction');
-    const m1ScaleText = document.getElementById('m1-scale-text');
-    const m1Examples = document.querySelectorAll('.m1-example');
-    const m1ExampleResults = document.querySelectorAll('#mode-1 .example-result');
+    const m1ScaleTitle = document.getElementById('m1-scale-title');
+    const m1Poteau = document.getElementById('m1-poteau');
+    const m1Porte = document.getElementById('m1-porte');
+    const m1Batiment = document.getElementById('m1-batiment');
+    const m1Terrain = document.getElementById('m1-terrain');
     
-    // MODE 2
+    // Éléments Mode 2
     const m2Real = document.getElementById('m2-real');
-    const m2Scale = document.getElementById('m2-scale');
+    const m2ScaleInput = document.getElementById('m2-scale');
     const m2Model = document.getElementById('m2-model');
     const m2Reduction = document.getElementById('m2-reduction');
-    const m2ScaleText = document.getElementById('m2-scale-text');
-    const m2Examples = document.querySelectorAll('.m2-example');
-    const m2ExampleResults = document.querySelectorAll('#mode-2 .example-result');
+    const m2ScaleTitle = document.getElementById('m2-scale-title');
+    const m2Poteau = document.getElementById('m2-poteau');
+    const m2Porte = document.getElementById('m2-porte');
+    const m2Batiment = document.getElementById('m2-batiment');
+    const m2Terrain = document.getElementById('m2-terrain');
     
-    // MODE 3
+    // Éléments Mode 3
     const m3Model = document.getElementById('m3-model');
-    const m3Scale = document.getElementById('m3-scale');
+    const m3ScaleInput = document.getElementById('m3-scale');
     const m3Real = document.getElementById('m3-real');
     const m3Reduction = document.getElementById('m3-reduction');
-    const m3ScaleText = document.getElementById('m3-scale-text');
-    const m3Examples = document.querySelectorAll('.m3-example');
-    const m3ExampleResults = document.querySelectorAll('#mode-3 .example-result');
+    const m3ScaleTitle = document.getElementById('m3-scale-title');
+    const m3Poteau = document.getElementById('m3-poteau');
+    const m3Porte = document.getElementById('m3-porte');
+    const m3Batiment = document.getElementById('m3-batiment');
+    const m3Terrain = document.getElementById('m3-terrain');
     
-    function format(num) {
-      if (!num || isNaN(num)) return '—';
-      if (num < 1) return num.toFixed(2);
-      if (num < 100) return num.toFixed(1);
-      return Math.round(num).toString();
-    }
+    let currentScale = null;
     
-    function calculateExamples(scale, exampleInputs, exampleResults) {
-      if (!scale || scale <= 0) return;
-      
-      exampleInputs.forEach(input => {
-        const value = parseFloat(input.value);
-        const object = input.getAttribute('data-object');
-        const resultElement = document.querySelector(`#mode-${getCurrentMode()} .example-result[data-object="${object}"]`);
-        
-        if (!value || value <= 0) {
-          resultElement.textContent = '—';
-          return;
-        }
-        
-        const maquetteM = (value * 100) / scale;
-        let result;
-        
-        if (object === 'poteau' || object === 'porte') {
-          result = (maquetteM * 10).toFixed(2) + ' mm';
-        } else {
-          result = (maquetteM / 10).toFixed(2) + ' cm';
-        }
-        
-        resultElement.textContent = result;
-      });
-    }
-    
-    function getCurrentMode() {
-      if (!document.getElementById('mode-1').classList.contains('active')) {
-        if (!document.getElementById('mode-2').classList.contains('active')) return 3;
-        return 2;
+    function formatMeasurement(value, unit) {
+      if (!value || isNaN(value)) return '—';
+      if (unit === 'mm') {
+        return value.toFixed(2) + ' mm';
+      } else if (unit === 'cm') {
+        return value.toFixed(2) + ' cm';
       }
-      return 1;
+      return value.toFixed(2);
+    }
+    
+    function updateExamples(mode) {
+      if (!currentScale || currentScale <= 0) return;
+      
+      const inputs = {
+        1: { poteau: m1Poteau, porte: m1Porte, batiment: m1Batiment, terrain: m1Terrain },
+        2: { poteau: m2Poteau, porte: m2Porte, batiment: m2Batiment, terrain: m2Terrain },
+        3: { poteau: m3Poteau, porte: m3Porte, batiment: m3Batiment, terrain: m3Terrain }
+      };
+      
+      const results = {
+        1: { poteau: 'm1-poteau-result', porte: 'm1-porte-result', batiment: 'm1-batiment-result', terrain: 'm1-terrain-result' },
+        2: { poteau: 'm2-poteau-result', porte: 'm2-porte-result', batiment: 'm2-batiment-result', terrain: 'm2-terrain-result' },
+        3: { poteau: 'm3-poteau-result', porte: 'm3-porte-result', batiment: 'm3-batiment-result', terrain: 'm3-terrain-result' }
+      };
+      
+      const modeInputs = inputs[mode];
+      const modeResults = results[mode];
+      
+      // Poteau et Porte en mm
+      const poteau = parseFloat(modeInputs.poteau.value);
+      const porte = parseFloat(modeInputs.porte.value);
+      
+      if (poteau && !isNaN(poteau)) {
+        const poteauMM = (poteau * 1000) / currentScale;
+        document.getElementById(modeResults.poteau).textContent = formatMeasurement(poteauMM, 'mm');
+      } else {
+        document.getElementById(modeResults.poteau).textContent = '—';
+      }
+      
+      if (porte && !isNaN(porte)) {
+        const porteMM = (porte * 1000) / currentScale;
+        document.getElementById(modeResults.porte).textContent = formatMeasurement(porteMM, 'mm');
+      } else {
+        document.getElementById(modeResults.porte).textContent = '—';
+      }
+      
+      // Bâtiment et Terrain en cm
+      const batiment = parseFloat(modeInputs.batiment.value);
+      const terrain = parseFloat(modeInputs.terrain.value);
+      
+      if (batiment && !isNaN(batiment)) {
+        const batimentCM = (batiment * 100) / currentScale;
+        document.getElementById(modeResults.batiment).textContent = formatMeasurement(batimentCM, 'cm');
+      } else {
+        document.getElementById(modeResults.batiment).textContent = '—';
+      }
+      
+      if (terrain && !isNaN(terrain)) {
+        const terrainCM = (terrain * 100) / currentScale;
+        document.getElementById(modeResults.terrain).textContent = formatMeasurement(terrainCM, 'cm');
+      } else {
+        document.getElementById(modeResults.terrain).textContent = '—';
+      }
     }
     
     function updateMode1() {
@@ -578,7 +547,7 @@
       if (!real || !model || real <= 0 || model <= 0) {
         m1Scale.textContent = '—';
         m1Reduction.textContent = '—';
-        m1ScaleText.textContent = 'À cette échelle :';
+        currentScale = null;
         return;
       }
       const realCm = real * 100;
@@ -586,120 +555,85 @@
       const reduction = (100 / scale).toFixed(2);
       m1Scale.textContent = '1/' + scale;
       m1Reduction.textContent = reduction + '%';
-      m1ScaleText.textContent = 'À cette échelle (1/' + scale + ') :';
-      
-      calculateExamples(scale, m1Examples, m1ExampleResults);
+      m1ScaleTitle.textContent = 'À cette échelle (1/' + scale + ') :';
+      currentScale = scale;
+      updateExamples(1);
     }
     
     function updateMode2() {
       const real = parseFloat(m2Real.value);
-      const scale = parseFloat(m2Scale.value);
+      const scale = parseFloat(m2ScaleInput.value);
       if (!real || !scale || real <= 0 || scale <= 0) {
         m2Model.textContent = '—';
         m2Reduction.textContent = '—';
-        m2ScaleText.textContent = 'À cette échelle :';
+        currentScale = null;
         return;
       }
       const realCm = real * 100;
       const model = realCm / scale;
       const reduction = (100 / scale).toFixed(2);
-      m2Model.textContent = format(model) + ' cm';
+      m2Model.textContent = model.toFixed(1) + ' cm';
       m2Reduction.textContent = reduction + '%';
-      m2ScaleText.textContent = 'À cette échelle (1/' + scale + ') :';
-      
-      calculateExamples(scale, m2Examples, m2ExampleResults);
+      m2ScaleTitle.textContent = 'À cette échelle (1/' + scale + ') :';
+      currentScale = scale;
+      updateExamples(2);
     }
     
     function updateMode3() {
       const model = parseFloat(m3Model.value);
-      const scale = parseFloat(m3Scale.value);
+      const scale = parseFloat(m3ScaleInput.value);
       if (!model || !scale || model <= 0 || scale <= 0) {
         m3Real.textContent = '—';
         m3Reduction.textContent = '—';
-        m3ScaleText.textContent = 'À cette échelle :';
+        currentScale = null;
         return;
       }
       const realCm = model * scale;
       const real = realCm / 100;
       const reduction = (100 / scale).toFixed(2);
-      m3Real.textContent = format(real) + ' m';
+      m3Real.textContent = real.toFixed(1) + ' m';
       m3Reduction.textContent = reduction + '%';
-      m3ScaleText.textContent = 'À cette échelle (1/' + scale + ') :';
-      
-      calculateExamples(scale, m3Examples, m3ExampleResults);
+      m3ScaleTitle.textContent = 'À cette échelle (1/' + scale + ') :';
+      currentScale = scale;
+      updateExamples(3);
     }
     
-    // Clear input on focus
-    [m1Real, m1Model, m2Real, m2Scale, m3Model, m3Scale].forEach(input => {
-      input.addEventListener('focus', function() {
-        this.placeholder = '';
-      });
-      input.addEventListener('blur', function() {
-        if (!this.value) {
-          this.placeholder = this.getAttribute('data-placeholder') || '';
-        }
-      });
-    });
-    
-    m1Examples.forEach(input => {
-      input.addEventListener('focus', function() {
-        this.placeholder = '';
-      });
-      input.addEventListener('blur', function() {
-        if (!this.value) {
-          this.placeholder = this.getAttribute('data-placeholder') || '';
-        }
-      });
-    });
-    
-    m2Examples.forEach(input => {
-      input.addEventListener('focus', function() {
-        this.placeholder = '';
-      });
-      input.addEventListener('blur', function() {
-        if (!this.value) {
-          this.placeholder = this.getAttribute('data-placeholder') || '';
-        }
-      });
-    });
-    
-    m3Examples.forEach(input => {
-      input.addEventListener('focus', function() {
-        this.placeholder = '';
-      });
-      input.addEventListener('blur', function() {
-        if (!this.value) {
-          this.placeholder = this.getAttribute('data-placeholder') || '';
-        }
-      });
-    });
-    
+    // Event listeners Mode 1
     m1Real.addEventListener('input', updateMode1);
     m1Model.addEventListener('input', updateMode1);
-    m1Examples.forEach(input => input.addEventListener('input', updateMode1));
+    [m1Poteau, m1Porte, m1Batiment, m1Terrain].forEach(input => {
+      input.addEventListener('focus', function() { this.value = ''; });
+      input.addEventListener('input', () => updateExamples(1));
+    });
     
+    // Event listeners Mode 2
     m2Real.addEventListener('input', updateMode2);
-    m2Scale.addEventListener('input', updateMode2);
-    m2Examples.forEach(input => input.addEventListener('input', updateMode2));
+    m2ScaleInput.addEventListener('input', updateMode2);
+    [m2Poteau, m2Porte, m2Batiment, m2Terrain].forEach(input => {
+      input.addEventListener('focus', function() { this.value = ''; });
+      input.addEventListener('input', () => updateExamples(2));
+    });
     
+    // Event listeners Mode 3
     m3Model.addEventListener('input', updateMode3);
-    m3Scale.addEventListener('input', updateMode3);
-    m3Examples.forEach(input => input.addEventListener('input', updateMode3));
+    m3ScaleInput.addEventListener('input', updateMode3);
+    [m3Poteau, m3Porte, m3Batiment, m3Terrain].forEach(input => {
+      input.addEventListener('focus', function() { this.value = ''; });
+      input.addEventListener('input', () => updateExamples(3));
+    });
     
     // Mode switching
     document.querySelectorAll('.mode-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         const mode = this.getAttribute('data-mode');
-        
-        document.querySelectorAll('.mode-section').forEach(section => {
-          section.classList.remove('active');
-        });
+        document.querySelectorAll('.mode-section').forEach(s => s.classList.remove('active'));
         document.getElementById('mode-' + mode).classList.add('active');
-        
-        document.querySelectorAll('.mode-btn').forEach(b => {
-          b.classList.remove('active');
-        });
+        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
         this.classList.add('active');
+        
+        if (mode === '1') updateMode1();
+        else if (mode === '2') updateMode2();
+        else if (mode === '3') updateMode3();
       });
     });
   </script>
